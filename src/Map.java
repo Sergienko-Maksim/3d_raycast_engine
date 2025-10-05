@@ -18,7 +18,7 @@ public class Map implements MapInterface{
     }
 
     Map(short a){
-        final String FILE_PATH = "C:\\Users\\Denis\\IdeaProjects\\3d raycast\\Map" + a + ".txt";
+        final String FILE_PATH = "map" + a + ".txt";
        File file = new File(FILE_PATH);
          Scanner FileScanner;
 

@@ -2,78 +2,96 @@ import java.awt.*;
 
 public class PartOfGraphics {
     private short length;
-    private float rot;
-    private byte Entity = 1;
-    private short LastLength;
+    private final float rot;
+    private byte entity = 1;
     private Map map;
-    private static double v = 0.1;
-     static int LengthOfVision = 600;
-     public  Color color;
+    private static byte v = 30;
+    static int lengthOfVision = 900;
+    public Color color;
+
     public PartOfGraphics(float rot, Map map, Color color){
         this.rot = rot;
         this.map = map;
         this.color = color;
     }
 
+    public static byte getV() {
+        return v;
+    }
 
-    public void Render(double PlayerRot, double x, double y){
-        if(PlayerRot+rot>360){
-            PlayerRot=PlayerRot-360+rot;
+    public static void setV(byte v) {
+        PartOfGraphics.v = v;
+    }
+
+    public static int getLengthOfVision() {
+        return lengthOfVision;
+    }
+
+    public static void setLengthOfVision(int lengthOfVision) {
+        PartOfGraphics.lengthOfVision = lengthOfVision;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public void render(double playerRot, double x, double y){
+        if(playerRot+rot>360){
+            playerRot=playerRot-360+rot;
         }
-        else if(PlayerRot+rot<0){
-            PlayerRot=360+rot+PlayerRot;
+        else if(playerRot+rot<0){
+            playerRot=360+rot+playerRot;
         }
         else{
-            PlayerRot+=rot;
+            playerRot+=rot;
         }
 
         short counter = 0;
 
         while(true){
 
-            if(PlayerRot>90 && PlayerRot<=180) {
-                x += (1 - ((PlayerRot - 90) / 90))*v;
-                y += ((PlayerRot - 90) / 90)*v;
+            if(playerRot>90 && playerRot<=180) {
+                x += (1 - ((playerRot - 90) / 90))/v;
+                y += ((playerRot - 90) / 90)/v;
             }
-            else if(PlayerRot>0 && PlayerRot<=90) {
-                x += (1 - ((90-PlayerRot) / 90))*v;
-                y -= ((90-PlayerRot) / 90)*v;
+            else if(playerRot>0 && playerRot<=90) {
+                x += (1 - ((90-playerRot) / 90))/v;
+                y -= ((90-playerRot) / 90)/v;
             }
-            else if(PlayerRot>270 && PlayerRot<=360) {
-                x -= (1-((PlayerRot-270)/90))*v;
-                y -= ((PlayerRot-270)/90)*v;
+            else if(playerRot>270 && playerRot<=360) {
+                x -= (1-((playerRot-270)/90))/v;
+                y -= ((playerRot-270)/90)/v;
             }
             else{
-                x -= (((PlayerRot-180)/90))*v;
-                y += (1-(PlayerRot-180)/90)*v;
+                x -= (((playerRot-180)/90))/v;
+                y += (1-(playerRot-180)/90)/v;
             }
             counter++;
-            Entity = map.PlayerMov((short)x, (short)y);
-            if(Entity !=0|| counter>=LengthOfVision ){
+            entity = map.movPlayer((short)x, (short)y);
+            if(entity !=0|| counter>= lengthOfVision){
                 break;
             }
         }
-        double coaf = 255-counter*((double)254/(double)LengthOfVision);
+        double coaf = 255-counter*((double)254/(double) lengthOfVision);
 
-        if(Entity==2){
+        if(entity ==2){
             color = Color.BLUE;
         }
         else {
             color = Color.GRAY;
         }
 
-        length = (short)((LengthOfVision - counter)/(LengthOfVision/41));
+        length = (short)((lengthOfVision - counter)*2/(lengthOfVision /41));
         color = new Color(color.getRed(),color.getGreen(), color.getBlue(),(int)coaf);
     }
-
-
-
 
     public short getLength() {
         return length;
     }
-
-
 
     public float getRot() {
         return rot;

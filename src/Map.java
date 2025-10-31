@@ -14,7 +14,7 @@ public class Map implements MapInterface{
     }
 
     Map(Map map){
-        this.Map = map.GetMap();
+        this.Map = map.getMap();
     }
 
     Map(short a){
@@ -30,7 +30,7 @@ public class Map implements MapInterface{
             }
 
 
-       short heigth = (short) FileScanner.nextInt();
+        short heigth = (short) FileScanner.nextInt();
         short width  = (short) FileScanner.nextInt();
        Map = new char[heigth][width];
         String line=FileScanner.nextLine();
@@ -46,30 +46,30 @@ public class Map implements MapInterface{
 
         }
 
-        public short GetX(){
+        public short getX(){
             return x;
         }
 
-    public short GetY(){
+    public short getY(){
         return y;
     }
 
 
 
 
-    public int Heigth(){
+    public int getHeigth(){
         return Map.length;
     }
 
-    public int Width(){
+    public int getWidth(){
         return Map[0].length;
     }
 
-    public void SetMap(char[][] Map){
+    public void setMap(char[][] Map){
         this.Map = Map;
     }
 
-    public void ClearMap(){
+    public void clearMap(){
         try {
             for (int i = 0; i < Map.length; i++) {
                 for (int j = 0; j < Map[i].length; j++) {
@@ -82,39 +82,11 @@ public class Map implements MapInterface{
 
     }
 
-    public char[][] GetMap(){
+    public char[][] getMap(){
         return Map;
     }
 
-   /* public int SetPlayerCords(short j2, short i2) {
-        try {
-            if (Map[i2][j2] == 1) {
-                for (short i = 0; i < Map.length; i++) {
-                    for (short j = 0; j < Map[i].length; j++) {
-                        if (Map[i][j] == ' ') {
-                            Map[i][j] = '*';
-                            return 1;
-                        }
-                    }
-                }
-                for (short i = 0; i < Map.length; i++) {
-                    for (short j = 0; j < Map[i].length; j++) {
-                        Map[i][j] = ' ';
-                    }
-                }
-                Map[i2][j2] = '*';
-                return 0;
-            } else {
-                Map[i2][j2] = '*';
-                return 1;
-            }
-        } catch (NullPointerException e) {
-            System.out.println(e);
-            return 0;
-        }
-    }*/
-
-    public byte PlayerMov(float j, float i){
+    public byte movPlayer(float j, float i){
         try {
             if(Map[0].length-1<j || Map.length-1<i){
                 return 1;
@@ -130,7 +102,6 @@ public class Map implements MapInterface{
                     y1=(short)(EntityList.get(k).y)-(EntityList.get(k).size/2);
                     x2=(short)(EntityList.get(k).x)+(EntityList.get(k).size/2);
                     y2=(short)(EntityList.get(k).y)+(EntityList.get(k).size/2);
-               //     System.out.println(i + " " + j + " | " + y1 + " " + x1 + " " + y2 + " " + x2);
                     if(y1<=i && y2>=i && x1<=j && x2>=j){
 
                         return 2;
@@ -146,7 +117,7 @@ public class Map implements MapInterface{
 
 
 
-    public void InputMap(){
+    public void outputMap(){
         try {
             for (short i = 0; i < Map.length; i++) {
                 for (short j = 0; j < Map[i].length; j++) {
@@ -157,17 +128,15 @@ public class Map implements MapInterface{
         }catch (NullPointerException e){
             System.out.println(e);
         }
-
-
     }
 
-    public int SpawnEntity(Entity entity){
+    public int spawnEntity(Entity entity){
         EntityList.add(entity);
         Map[(short)entity.y][(short)entity.x]='&';
         return EntityList.size()-1;
     }
 
-    public void MovEnitity(double x, double y, int index){
+    public void movEntity(float x, float y, int index){
         Entity entity = EntityList.get(index);
         Map[(short)y][(short)x] = '&';
         Map[(short)entity.y][(short)entity.x] = ' ';

@@ -1,6 +1,6 @@
 public interface PlayerInterface {
     public void Mov(byte a);
-    public void Rot(byte a);
+    public void Rot(short a);
     private void MakeCords(){};
     public double getX_() ;
     public double getY_();

@@ -1,10 +1,9 @@
 public interface MapInterface {
-
-    public int Heigth();
-    public int Width();
-    public void SetMap(char[][] Map);
-    public void ClearMap();
-    public char[][] GetMap();
-    public void InputMap();
-    public byte PlayerMov(float j, float i);
+    public int getHeigth();
+    public int getWidth();
+    public void setMap(char[][] Map);
+    public void clearMap();
+    public char[][] getMap();
+    public void outputMap();
+    public byte movPlayer(float j, float i);
 }

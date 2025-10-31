@@ -3,7 +3,6 @@ import static java.lang.Thread.sleep;
 public class Player implements PlayerInterface{
 
 
-
     private double x;
     private double y;
     private float v;
@@ -11,34 +10,28 @@ public class Player implements PlayerInterface{
     private Map map;
 
 
-
-
     Player(double x, double y, char[][] Map, float v){
         map = new Map(Map);
-
-        this.x = map.GetX();
-        this.y = map.GetY();
+        this.x = map.getX();
+        this.y = map.getY();
         this.v=v;
     }
     Player(float v, short a){
         map = new Map(a);
-        this.x = map.GetX();
-        this.y = map.GetY();
+        this.x = map.getX();
+        this.y = map.getY();
         this.v=v;
-        System.out.println(x + " " + y);
     }
     Player(short a){
         map = new Map(a);
-        x=map.GetX();
-        y=map.GetY();
+        x=map.getX();
+        y=map.getY();
         v= 0.01F;
-        System.out.println(x  + "  "  + y);
     }
     Player(Player player){
         this.x = player.getX_();
         this.y = player.getY_();
         map = player.getMap();
-
     }
 
 
@@ -59,29 +52,22 @@ public class Player implements PlayerInterface{
     public void Mov(byte mov){
         double LocalRot = rot;
         double x2 = 0 ,y2 = 0;
-
-
          if(mov==2){
              if(LocalRot-180<0){
                  LocalRot += 180;
-
              }
              else {
                  LocalRot-=180;
              }
-
-
         }
         else if(mov==3){
              if(LocalRot-90<0){
                  LocalRot+=270;
-
              }
              else{
                  LocalRot-=90;
              }
         }
-
         else if(mov == 4 ){
              if(LocalRot+90>360){
                  LocalRot-=270;
@@ -106,24 +92,17 @@ public class Player implements PlayerInterface{
             x2 -= (((LocalRot-180)/90))*v;
             y2 += (1-(LocalRot-180)/90)*v;
         }
-        if(map.PlayerMov((short)(x+x2), (short)(y+y2))==0) {
-            x += x2;
-            y += y2;
-        //    System.out.println(x + " " + y);
+        if(map.movPlayer((short)(x+x2), (short)(y+y2))==0) {
+            x += x2;    y += y2;
         }
-
-        //1
         else{
                 if(LocalRot-90<0){
                     LocalRot+=270;
-
                 }
                 else{
                     LocalRot-=90;
                 }
-                x2=0;
-                y2=0;
-
+                x2=0; y2=0;
             if(LocalRot>90 && LocalRot<=180) {
                 x2 += (1 - ((LocalRot - 90) / 90))*v*0.25;
                 y2 += ((LocalRot - 90) / 90)*v*0.25;
@@ -140,23 +119,17 @@ public class Player implements PlayerInterface{
                 x2 -= (((LocalRot-180)/90))*v*0.25;
                 y2 += (1-(LocalRot-180)/90)*v*0.25;
             }
-               if(map.PlayerMov((short)(x+x2), (short)(y+y2))==0){
-                   x += x2;
-                   y += y2;
+               if(map.movPlayer((short)(x+x2), (short)(y+y2))==0){
+                   x += x2; y += y2;
                 }
                else{
-
-                   //2
-
                    if(LocalRot+90>360){
                        LocalRot-=270;
                    }
                    else{
                        LocalRot+=90;
                    }
-                   x2=0;
-                   y2=0;
-
+                   x2=0; y2=0;
                    if(LocalRot>90 && LocalRot<=180) {
                        x2 += (1 - ((LocalRot - 90) / 90))*v*0.25;
                        y2 += ((LocalRot - 90) / 90)*v*0.25;
@@ -173,17 +146,13 @@ public class Player implements PlayerInterface{
                        x2 -= (((LocalRot-180)/90))*v*0.25;
                        y2 += (1-(LocalRot-180)/90)*v*0.25;
                    }
-                   if(map.PlayerMov((short)(x+x2), (short)(y+y2))==0){
-                       x += x2;
-                       y += y2;
+                   if(map.movPlayer((short)(x+x2), (short)(y+y2))==0){
+                       x += x2; y += y2;
                    }
                }
-
-            }
-
-      //  map.InputMapFormat();
+        }
     }
-    public void Rot(byte a){
+    public void Rot(short a){
                 if(a==1) {
                     rot -= 0.15;
                     if (rot <= 0) {

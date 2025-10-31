@@ -29,6 +29,4 @@ public class ClickListener extends KeyAdapter implements KeyListener{
     public void keyTyped(KeyEvent event) {
 
     }
-
-
 }

@@ -30,7 +30,7 @@ public class MainFrame extends Thread {
         frame.setVisible(Vis);
     }
 
-    public void InputArray(Color color) {
+    public void inputArray(Color color) {
         float step = 100 / (float) GraphicsQuality;
         for (short i = 0; i < GraphicsQuality; i++) {
             Graphics[i] = new PartOfGraphics((100 - step * i), player.getMap(), color);
@@ -43,32 +43,31 @@ public class MainFrame extends Thread {
             public void keyPressed(KeyEvent e) {
                 int keyCode = e.getKeyCode();
                 if (keyCode == KeyEvent.VK_W) {
-                    LocalMessege('w');
+                    localMessage('w');
                 } else if (keyCode == KeyEvent.VK_S) {
-                    LocalMessege('s');
+                    localMessage('s');
                 } else if (keyCode == KeyEvent.VK_A) {
-                    LocalMessege('a');
+                    localMessage('a');
                 } else if (keyCode == KeyEvent.VK_D) {
-                    LocalMessege('d');
+                    localMessage('d');
                 } else if (keyCode == KeyEvent.VK_LEFT) {
-                    LocalMessege('l');
+                    localMessage('l');
                 } else if (keyCode == KeyEvent.VK_RIGHT) {
-                    LocalMessege('r');
+                    localMessage('r');
                 }
             }
 
         });
     }
 
-    public void DrawGraphics() {
-        RenderGraphics();
+    public void drawGraphics() {
+        renderGraphics();
         JPanel panel = new JPanel() {
             @Override
             public void paintComponent(Graphics g) {
                 super.paintComponent(g);
-
                 int step = 2400 / GraphicsQuality;
-                int LengthOfVision = 3600 / PartOfGraphics.LengthOfVision;
+                int LengthOfVision = 3600 / PartOfGraphics.lengthOfVision;
                 for (short i = 0; i < GraphicsQuality; i++) {
                     for (short j = 0; j < step; j++) {
                         g.setColor(Graphics[i].color);
@@ -85,39 +84,17 @@ public class MainFrame extends Thread {
         frame.setVisible(true);
     }
 
-    public void LocalMessege(char str) {
+    public void localMessage(char str) {
         for (int i = 0; i < speed; i++) {
-            Main.Messege(str);
+            Main.message(str);
         }
-
-
     }
 
-    public void RenderGraphics() {
+    public void renderGraphics() {
         for (short i = 0; i < GraphicsQuality; i++) {
-            Graphics[i].Render(player.getRot(), player.getX_(), player.getY_());
+            Graphics[i].render(player.getRot(), player.getX_(), player.getY_());
         }
     }
 
 }
-
- /*   public void DrawGraphics(){
-
-
-        for (byte i = 42; i>0; i--) {
-            for (byte j = 0; j < 64; j++) {
-                Graphics[j].draw(i);
-                Graphics[j].draw(i);
-                Graphics[j].draw(i);
-                Graphics[j].draw(i);
-            }
-            System.out.println();
-            }
-
-
-
-        }
-
-    }
-*/
 

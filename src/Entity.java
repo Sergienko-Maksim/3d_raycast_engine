@@ -15,4 +15,8 @@ public class Entity {
     public boolean isSpawned() {
         return spawned;
     }
+
+    public void setSpawned(boolean spawned) {
+        this.spawned = spawned;
+    }
 }

@@ -86,7 +86,7 @@ public class MainFrame extends Thread {
 
     public void localMessage(char str) {
         for (int i = 0; i < speed; i++) {
-            Main.message(str);
+            MainController.message(str);
         }
     }
 

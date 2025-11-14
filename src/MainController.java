@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.Scanner;
 import static java.lang.Thread.sleep;
 
-public class Main {
+public class MainController {
     static Scanner in =new Scanner(System.in);
     static Player player;
     public static void main(String[] args) throws InterruptedException {
